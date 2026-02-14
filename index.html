@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mãos de Leide | Massoterapia & Bem-estar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                white: '#FFFFFF',
+                cream: '#FAF7F2', // Fundo principal mais quente
+                sage: '#8DA68D',  // Verde sálvia (saúde e equilíbrio)
+                sageDark: '#6B7E6B',
+                sageLight: '#E5EDE5',
+                textMain: '#2D332D', // Cinza floresta profundo
+                textSub: '#5A635A',
+                whatsapp: '#25D366',
+                whatsappHover: '#1DA851',
+                border: '#E8E2D9', // Bordas mais suaves
+                gold: '#EAB308'   // Ouro vibrante e sofisticado para melhor contraste
+              }
+            },
+            fontFamily: {
+              sans: ['Montserrat', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            animation: {
+              'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              'pulse-glow': {
+                '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                '50%': { opacity: .8, transform: 'scale(1.1)', boxShadow: '0 0 20px rgba(141, 166, 141, 0.6)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #FAF7F2;
+        scroll-behavior: smooth;
+        color: #2D332D;
+      }
+      .bg-texture {
+        background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+      }
+      .soft-shadow {
+        box-shadow: 0 10px 40px rgba(141, 166, 141, 0.1);
+      }
+      h1, h2, h3, h4, .font-serif {
+        color: #2D332D;
+      }
+      p {
+        color: #5A635A;
+      }
+      ::selection {
+        background-color: #8DA68D;
+        color: #FFFFFF;
+      }
+      .sage-gradient {
+        background: linear-gradient(135deg, #8DA68D 0%, #6B7E6B 100%);
+      }
+      @keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+      }
+      .animate-blink {
+        animation: blink 1s infinite;
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4",
+        "lucide-react": "https://esm.sh/lucide-react@^0.564.0"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
