@@ -32,6 +32,28 @@ const IMG_WAX_VIRILHA = "https://i.postimg.cc/44rkhBwR/saude-bem-estar-e-mulher-
 const WHATSAPP_NUMBER = "5561985891458";
 
 /**
+ * Função utilitária para rolagem suave com offset para compensar o header fixo
+ */
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id.replace('#', ''));
+  if (element) {
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  } else if (id === '#') {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+};
+
+/**
  * Componente de Logo em Cor Original
  */
 const LogoImage = ({ className = "" }: { className?: string }) => {
@@ -114,10 +136,16 @@ const Navbar = () => {
     { name: 'Contato', href: '#contato' },
   ];
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+    setIsOpen(false);
+  };
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-brand-cream/95 backdrop-blur-md py-3 shadow-sm border-b border-brand-border' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-3 group">
+        <a href="#" onClick={(e) => handleLinkClick(e, '#')} className="flex items-center gap-3 group">
           <LogoImage className="h-10 md:h-12 w-10 md:w-12 group-hover:scale-110" />
           <div className="flex items-baseline gap-1.5">
             <span className={`text-xl md:text-2xl font-sans font-extralight transition-colors duration-300 ${scrolled ? 'text-brand-textMain' : 'text-white'}`}>
@@ -134,7 +162,8 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className={`text-xs uppercase tracking-widest font-bold transition-all hover:text-brand-sage ${scrolled ? 'text-brand-textMain' : 'text-white'}`}
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className={`text-xs uppercase tracking-widest font-bold transition-all hover:text-brand-sage cursor-pointer ${scrolled ? 'text-brand-textMain' : 'text-white'}`}
             >
               {link.name}
             </a>
@@ -154,8 +183,9 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* Menu Mobile */}
       {isOpen && (
-        <div className="lg:hidden bg-brand-cream absolute top-0 left-0 w-full h-screen flex flex-col justify-center items-center gap-6 z-50">
+        <div className="lg:hidden bg-brand-cream fixed top-0 left-0 w-full h-screen flex flex-col justify-center items-center gap-6 z-50">
           <button className="absolute top-6 right-6 text-brand-textMain" onClick={() => setIsOpen(false)}>
             <X size={32} />
           </button>
@@ -164,8 +194,8 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              onClick={() => setIsOpen(false)}
-              className="text-2xl font-serif text-brand-textMain font-bold"
+              onClick={(e) => handleLinkClick(e, link.href)}
+              className="text-2xl font-serif text-brand-textMain font-bold cursor-pointer"
             >
               {link.name}
             </a>
@@ -174,7 +204,6 @@ const Navbar = () => {
             href={`https://wa.me/${WHATSAPP_NUMBER}`} 
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => setIsOpen(false)}
             className="text-brand-sage text-2xl font-serif font-bold"
           >
             WhatsApp
@@ -188,14 +217,13 @@ const Navbar = () => {
 // --- Hero ---
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-textMain">
+    <section id="inicio" className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-textMain">
       <div className="absolute inset-0 z-0">
         <img 
           src={MAIN_BG_URL} 
           className="w-full h-full object-cover" 
           alt="Massoterapia & Bem-estar Mãos de Leide"
         />
-        {/* Overlay sutil para garantir legibilidade mantendo as cores da imagem o mais natural possível */}
         <div className="absolute inset-0 bg-brand-textMain/30"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-textMain/40"></div>
       </div>
@@ -211,10 +239,18 @@ const Hero = () => {
           Reconecte-se com seu corpo e mente através de técnicas especializadas de massoterapia, ventosaterapia e pedras quentes. Uma experiência de relaxamento profundo e renovação.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <a href="#contato" className="bg-brand-sage hover:bg-brand-sageDark text-brand-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl transition-all hover:-translate-y-1">
+          <a 
+            href="#contato" 
+            onClick={(e) => { e.preventDefault(); scrollToSection('#contato'); }}
+            className="bg-brand-sage hover:bg-brand-sageDark text-brand-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl transition-all hover:-translate-y-1"
+          >
             Agendar Sessão
           </a>
-          <a href="#servicos" className="bg-brand-white/10 backdrop-blur-md border border-brand-white/30 text-brand-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-brand-white/20 transition-all">
+          <a 
+            href="#servicos" 
+            onClick={(e) => { e.preventDefault(); scrollToSection('#servicos'); }}
+            className="bg-brand-white/10 backdrop-blur-md border border-brand-white/30 text-brand-white px-12 py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-brand-white/20 transition-all"
+          >
             Conhecer Serviços
           </a>
         </div>
@@ -282,7 +318,7 @@ const About = () => {
   const tags = ["Alívio da Tensão", "Reequilíbrio Energético", "Flexibilidade & Mobilidade", "Alívio de Dores Musculares", "Bem-estar Emocional", "Sono Reparador"];
 
   return (
-    <section id="sobre" className="py-24 bg-brand-white relative overflow-hidden">
+    <section id="sobre" className="py-24 bg-brand-white relative overflow-hidden scroll-mt-20">
       <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16">
         <div className="relative flex-shrink-0">
           <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-brand-border bg-brand-cream relative group max-w-[440px] max-h-[640px]">
@@ -407,7 +443,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="servicos" className="py-24 bg-brand-cream relative overflow-hidden">
+    <section id="servicos" className="py-24 bg-brand-cream relative overflow-hidden scroll-mt-20">
       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-sage/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-sage/5 rounded-full blur-3xl -ml-48 -mb-48"></div>
 
@@ -433,7 +469,7 @@ const Services = () => {
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=Olá Leide! Gostaria de uma consultoria para descobrir qual técnica de massagem é ideal para mim.`} 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 bg-brand-sage hover:bg-brand-sageDark text-brand-white px-12 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-md group"
+              className="inline-flex items-center gap-4 bg-brand-sage hover:bg-brand-sageDark text-brand-white px-12 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-md group cursor-pointer"
             >
               Fale comigo e descubra
               <MessageCircle size={20} className="transition-transform group-hover:rotate-12" />
@@ -442,7 +478,7 @@ const Services = () => {
         </div>
 
         {/* Nova Seção de Depilação */}
-        <div id="depilacao" className="pt-24 scroll-mt-24">
+        <div id="depilacao" className="pt-24 scroll-mt-20">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-[#F3B07C] font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Estética & Higiene</span>
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-brand-textMain mb-6">Depilação com cera</h2>
@@ -466,7 +502,7 @@ const Services = () => {
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Olá Leide! Gostaria de montar um plano de depilação personalizado combinado.`} 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-[#F3B07C] hover:bg-[#D4A373] text-brand-white px-12 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-md group"
+                className="inline-flex items-center gap-4 bg-[#F3B07C] hover:bg-[#D4A373] text-brand-white px-12 py-5 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-md group cursor-pointer"
               >
                 Montar meu plano agora
               </a>
@@ -508,7 +544,7 @@ const Testimonials = () => {
   }, [testimonials.length]);
 
   return (
-    <section id="depoimentos" className="py-24 bg-brand-sage relative overflow-hidden">
+    <section id="depoimentos" className="py-24 bg-brand-sage relative overflow-hidden scroll-mt-20">
       <div className="absolute top-0 left-0 w-full h-full bg-texture opacity-10"></div>
       <div className="container mx-auto px-6 text-center relative z-10">
         <span className="text-brand-sageLight font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Experiências</span>
@@ -569,7 +605,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contato" className="py-24 bg-brand-cream border-t border-brand-border">
+    <section id="contato" className="py-24 bg-brand-cream border-t border-brand-border scroll-mt-20">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-20">
           <div className="lg:w-1/2">
@@ -655,6 +691,11 @@ const Contact = () => {
 
 // --- Footer ---
 const Footer = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+  };
+
   return (
     <footer className="bg-brand-textMain pt-24 pb-12 border-t border-brand-white/10 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-brand-sage/5 rounded-full blur-3xl -mr-32 -mb-32 opacity-20"></div>
@@ -674,29 +715,29 @@ const Footer = () => {
           <div>
             <h4 className="text-brand-sage font-bold mb-8 uppercase tracking-widest text-[10px]">Navegação</h4>
             <ul className="space-y-4 text-brand-white/60 text-xs font-light">
-              <li><a href="#" className="hover:text-brand-sage transition-colors">Início</a></li>
-              <li><a href="#sobre" className="hover:text-brand-sage transition-colors">Sobre mim</a></li>
-              <li><a href="#servicos" className="hover:text-brand-sage transition-colors">Serviços</a></li>
-              <li><a href="#depilacao" className="hover:text-brand-sage transition-colors">Depilação</a></li>
-              <li><a href="#depoimentos" className="hover:text-brand-sage transition-colors">Depoimentos</a></li>
-              <li><a href="#contato" className="hover:text-brand-sage transition-colors">Contato</a></li>
+              <li><a href="#" onClick={(e) => handleLinkClick(e, '#')} className="hover:text-brand-sage transition-colors cursor-pointer">Início</a></li>
+              <li><a href="#sobre" onClick={(e) => handleLinkClick(e, '#sobre')} className="hover:text-brand-sage transition-colors cursor-pointer">Sobre mim</a></li>
+              <li><a href="#servicos" onClick={(e) => handleLinkClick(e, '#servicos')} className="hover:text-brand-sage transition-colors cursor-pointer">Serviços</a></li>
+              <li><a href="#depilacao" onClick={(e) => handleLinkClick(e, '#depilacao')} className="hover:text-brand-sage transition-colors cursor-pointer">Depilação</a></li>
+              <li><a href="#depoimentos" onClick={(e) => handleLinkClick(e, '#depoimentos')} className="hover:text-brand-sage transition-colors cursor-pointer">Depoimentos</a></li>
+              <li><a href="#contato" onClick={(e) => handleLinkClick(e, '#contato')} className="hover:text-brand-sage transition-colors cursor-pointer">Contato</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-brand-sage font-bold mb-8 uppercase tracking-widest text-[10px]">Serviços</h4>
             <ul className="space-y-4 text-brand-white/60 text-xs font-light">
-              <li><a href="#servicos" className="hover:text-brand-sage transition-colors">Ventosaterapia</a></li>
-              <li><a href="#servicos" className="hover:text-brand-sage transition-colors">Pedras Quentes</a></li>
-              <li><a href="#servicos" className="hover:text-brand-sage transition-colors">Massagem Relaxante</a></li>
-              <li><a href="#servicos" className="hover:text-brand-sage transition-colors">Drenagem Linfática</a></li>
-              <li><a href="#depilacao" className="hover:text-brand-sage transition-colors">Depilação com Cera</a></li>
+              <li><a href="#servicos" onClick={(e) => handleLinkClick(e, '#servicos')} className="hover:text-brand-sage transition-colors cursor-pointer">Ventosaterapia</a></li>
+              <li><a href="#servicos" onClick={(e) => handleLinkClick(e, '#servicos')} className="hover:text-brand-sage transition-colors cursor-pointer">Pedras Quentes</a></li>
+              <li><a href="#servicos" onClick={(e) => handleLinkClick(e, '#servicos')} className="hover:text-brand-sage transition-colors cursor-pointer">Massagem Relaxante</a></li>
+              <li><a href="#servicos" onClick={(e) => handleLinkClick(e, '#servicos')} className="hover:text-brand-sage transition-colors cursor-pointer">Drenagem Linfática</a></li>
+              <li><a href="#depilacao" onClick={(e) => handleLinkClick(e, '#depilacao')} className="hover:text-brand-sage transition-colors cursor-pointer">Depilação com Cera</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-brand-sage font-bold mb-8 uppercase tracking-widest text-[10px]">Contato Direto</h4>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="text-brand-white font-bold text-lg mb-4 hover:text-brand-sage transition-colors block">(61) 98589-1458</a>
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="text-brand-white font-bold text-lg mb-4 hover:text-brand-sage transition-colors block cursor-pointer">(61) 98589-1458</a>
             <p className="text-brand-white/40 text-xs font-light uppercase tracking-widest">Brasília, Distrito Federal</p>
             <div className="flex gap-4 mt-8">
                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-brand-white/5 rounded-full border border-brand-white/10 flex items-center justify-center text-brand-sage hover:bg-brand-sage hover:text-white transition-all cursor-pointer">
