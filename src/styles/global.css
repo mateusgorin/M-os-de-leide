@@ -1,0 +1,438 @@
+@import "tailwindcss";
+
+/* Auto-hosted Fonts via @fontsource (Apenas subsets latin em uso) */
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
+
+@theme {
+  --color-black: #1C1A1D;
+  --color-black2: #141215;
+  --color-gray: #F9F6F1;
+  --color-gold: #C2A74E;
+  --color-border: #E8E3DA;
+  --color-text-muted: #838184;
+  --color-text-dark: #6E6B70;
+  --color-primary: #3C2425;
+  --color-secondary: #954C22;
+  --color-text: #464646;
+  --color-accent: #ECD3C2;
+  --color-peach: #DDAF82;
+  --color-white: #FFFFFF;
+
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: "Times New Roman", Times, serif;
+
+  --shadow-card: 0 10px 60px 0 rgba(0, 0, 0, 0.07);
+}
+
+@layer base {
+  :root {
+    --black: #1C1A1D;
+    --black2: #141215;
+    --gray: #F9F6F1;
+    --gold: #C2A74E;
+    --border: #E8E3DA;
+    --text-muted: #838184;
+    --text-dark: #6E6B70;
+    --primary: #3C2425;
+    --secondary: #954C22;
+    --text: #464646;
+    --accent: #ECD3C2;
+    --peach: #DDAF82;
+    --white: #FFFFFF;
+
+    --container-max-width: 1280px;
+    --card-shadow: 0 10px 60px 0 rgba(0, 0, 0, 0.07);
+  }
+
+  /* Global Reset & Base */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 100px;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background-color: var(--gray);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #954C22;
+    color: #FFFFFF;
+  }
+
+  /* Títulos de seção e hero usam Times New Roman */
+  h1, h2, h3, h4, .font-serif, .sec-title__title {
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  /* Zero border-radius em inputs e botões sem !important */
+  input, textarea, button, select {
+    border-radius: 0;
+  }
+}
+
+@layer components {
+  /* Sombra suave de card de luxo */
+  .shadow-card {
+    box-shadow: 0 10px 60px 0 rgba(0, 0, 0, 0.07);
+  }
+
+  /* Container do tema: max-width 1280px */
+  .solox-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .solox-container-fluid {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* ==========================================================================
+     BOTÃO .solox-btn (Design Luxury Spa)
+     ========================================================================== */
+  .solox-btn {
+    display: inline-block;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 16.25px 48px;
+    position: relative;
+    overflow: hidden;
+    transition: all 500ms ease;
+    background-color: #1C1A1D;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+    text-decoration: none;
+  }
+
+  .solox-btn::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #954C22;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    transition: 700ms cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    z-index: -1;
+  }
+
+  .solox-btn:hover {
+    background-color: #FFFFFF;
+    color: #1C1A1D;
+  }
+
+  .solox-btn:hover::before {
+    top: 100%;
+  }
+
+  /* Variante Header */
+  .solox-btn--header {
+    font-size: 10px;
+    padding: 11px 29px;
+    margin-left: 30px;
+    background-color: #FFFFFF;
+    color: #1C1A1D;
+  }
+
+  .solox-btn--header::before {
+    background-color: #FFFFFF;
+  }
+
+  .solox-btn--header:hover {
+    background-color: #954C22;
+    color: #FFFFFF;
+  }
+
+  .solox-btn--header:hover::before {
+    background-color: #954C22;
+  }
+
+  /* Variante Outline */
+  .solox-btn--outline {
+    background-color: transparent;
+    color: #C2A74E;
+    border: 1px solid #C2A74E;
+  }
+
+  .solox-btn--outline::before {
+    display: none;
+  }
+
+  .solox-btn--outline:hover {
+    background-color: #C2A74E;
+    color: #1C1A1D;
+    border-color: #C2A74E;
+  }
+
+  /* ==========================================================================
+     TÍTULOS COM SUBLINHADO ANIMADO (Solox Card Titles)
+     ========================================================================== */
+  .solox-title-link {
+    display: inline;
+    background-image: linear-gradient(#C2A74E, #C2A74E);
+    background-size: 0% 1px;
+    background-position: 0 95%;
+    background-repeat: no-repeat;
+    transition: background-size 500ms ease, color 500ms ease;
+    text-decoration: none;
+  }
+
+  .solox-title-link:hover,
+  .group:hover .solox-title-link {
+    background-size: 100% 1px;
+    color: #C2A74E;
+  }
+
+  /* ==========================================================================
+     REVEAL / ANIMAÇÕES
+     ========================================================================== */
+  .solox-reveal-hidden {
+    opacity: 0;
+  }
+
+  .solox-reveal-fadeInUp {
+    animation-name: soloxFadeInUp;
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
+
+  .solox-reveal-fadeInLeft {
+    animation-name: soloxFadeInLeft;
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
+
+  .solox-reveal-fadeInRight {
+    animation-name: soloxFadeInRight;
+    animation-duration: 1000ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .solox-reveal-hidden,
+    .solox-reveal-fadeInUp,
+    .solox-reveal-fadeInLeft,
+    .solox-reveal-fadeInRight {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+  }
+
+  /* ==========================================================================
+     CURSOR CUSTOMIZADO (Somente Desktop pointer:fine)
+     ========================================================================== */
+  @media (pointer: fine) {
+    .cursor {
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
+      border: 1px solid #C2A74E;
+      position: fixed;
+      pointer-events: none;
+      z-index: 999991;
+      transform: translate(calc(-50% + 5px), -50%);
+      transition: width 200ms ease-out, height 200ms ease-out, transform 200ms ease-out, border-color 200ms ease-out;
+      top: 0;
+      left: 0;
+    }
+
+    .cursor.cursor-hover {
+      transform: translate(calc(-50% + 5px), -50%) scale(1.6);
+      border-color: #954C22;
+    }
+
+    .cursor-two {
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: #C2A74E;
+      opacity: 0.3;
+      position: fixed;
+      pointer-events: none;
+      z-index: 999992;
+      transform: translate(-50%, -50%);
+      transition: opacity 150ms ease-out, transform 150ms ease-out;
+      top: 0;
+      left: 0;
+    }
+
+    .cursor-two.cursor-hover {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+  }
+
+  @media not all and (pointer: fine) {
+    .cursor,
+    .cursor-two {
+      display: none !important;
+    }
+  }
+
+  /* ==========================================================================
+     LINKS DO RODAPÉ COM SUBLINHADO ANIMADO
+     ========================================================================== */
+  .footer-link {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.75);
+    display: inline-block;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0px 1px;
+    background-position: 0 95%;
+    background-repeat: no-repeat;
+    transition: background-size 500ms ease, color 500ms ease;
+    text-decoration: none;
+  }
+
+  .footer-link:hover {
+    background-size: 100% 1px;
+    color: #FFFFFF;
+  }
+
+  /* ==========================================================================
+     PULSO DO WHATSAPP FLUTUANTE (0 -> 14px, 2.5s infinite)
+     ========================================================================== */
+  .whatsapp-pulse {
+    animation: whatsappPulse 2.5s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-pulse {
+      animation: none !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   KEYFRAMES GLOBAIS
+   ========================================================================== */
+@keyframes soloxFadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes soloxFadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes soloxFadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes whatsappPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* ==========================================================================
+   BALANÇO SUAVE DA FOLHA BOTÂNICA DO RODAPÉ (Breeze Animation)
+   ========================================================================== */
+@keyframes footerLeafSway {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(5deg) translate3d(8px, -5px, 0) scale(1.02);
+  }
+  100% {
+    transform: rotate(-3.5deg) translate3d(-4px, 3px, 0) scale(0.99);
+  }
+}
+
+.footer-leaf-sway {
+  transform-origin: 0% 100%;
+  animation: footerLeafSway 8s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-leaf-sway {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   MOVIMENTO LATERAL TIPO GANGORRA DO PRATO SPA (Smooth Seesaw Animation)
+   ========================================================================== */
+@keyframes spaDishSeesaw {
+  0% {
+    transform: translateY(-50%) rotate(-3.5deg) translateX(-5px);
+  }
+  50% {
+    transform: translateY(-50%) rotate(3.5deg) translateX(5px);
+  }
+  100% {
+    transform: translateY(-50%) rotate(-3.5deg) translateX(-5px);
+  }
+}
+
+.spa-dish-seesaw {
+  transform-origin: 50% 65%;
+  animation: spaDishSeesaw 5.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spa-dish-seesaw {
+    animation: translateY(-50%) !important;
+  }
+}
+
+

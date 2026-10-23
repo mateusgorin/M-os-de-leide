@@ -1,99 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mãos de Leide | Massoterapia e Depilação em Brasília–DF</title>
-    <meta name="description" content="Recupere seu bem-estar com Mãos de Leide em Brasília–DF. Especialista em Massoterapia, Ventosaterapia, Pedras Quentes e Depilação com Cera. Atendimento em domicílio.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                white: '#FFFFFF',
-                cream: '#FAF7F2', // Fundo principal mais quente
-                sage: '#8DA68D',  // Verde sálvia (saúde e equilíbrio)
-                sageDark: '#6B7E6B',
-                sageLight: '#E5EDE5',
-                textMain: '#2D332D', // Cinza floresta profundo
-                textSub: '#5A635A',
-                whatsapp: '#25D366',
-                whatsappHover: '#1DA851',
-                border: '#E8E2D9', // Bordas mais suaves
-                gold: '#EAB308'   // Ouro vibrante e sofisticado para melhor contraste
-              }
-            },
-            fontFamily: {
-              sans: ['Montserrat', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            animation: {
-              'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              'pulse-glow': {
-                '0%, 100%': { opacity: 1, transform: 'scale(1)' },
-                '50%': { opacity: .8, transform: 'scale(1.1)', boxShadow: '0 0 20px rgba(141, 166, 141, 0.6)' },
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      body {
-        background-color: #FAF7F2;
-        scroll-behavior: smooth;
-        color: #2D332D;
-      }
-      .bg-texture {
-        background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
-      }
-      .soft-shadow {
-        box-shadow: 0 10px 40px rgba(141, 166, 141, 0.1);
-      }
-      h1, h2, h3, h4, .font-serif {
-        color: #2D332D;
-      }
-      p {
-        color: #5A635A;
-      }
-      ::selection {
-        background-color: #8DA68D;
-        color: #FFFFFF;
-      }
-      .sage-gradient {
-        background: linear-gradient(135deg, #8DA68D 0%, #6B7E6B 100%);
-      }
-      @keyframes blink {
-        0% { opacity: 1; }
-        50% { opacity: 0.3; }
-        100% { opacity: 1; }
-      }
-      .animate-blink {
-        animation: blink 1s infinite;
-      }
-    </style>
-    <script type="importmap">
-    {
-      "imports": {
-        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-        "react/": "https://esm.sh/react@^19.2.4/",
-        "react": "https://esm.sh/react@^19.2.4",
-        "lucide-react": "https://esm.sh/lucide-react@^0.564.0"
-      }
-    }
-    </script>
-  <link rel="stylesheet" href="/index.css">
-</head>
+    <meta name="theme-color" content="#3C2425" />
+    <title>Massagem e Depilação em Domicílio em Brasília | Mãos de Leide</title>
+    <meta
+      name="description"
+      content="Massoterapia, ventosaterapia, pedras quentes e depilação com cera em domicílio em Brasília–DF. Atendimento exclusivo com a Leide. Agende pelo WhatsApp."
+    />
+    <!-- TROCAR junto com SITE_URL em src/data/site.ts -->
+    <link rel="canonical" href="https://www.maosdeleide.com.br/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preload essencial para Performance e LCP do Hero -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://res.cloudinary.com/dw5b0vlbz/video/upload/so_0,f_jpg,q_auto,w_1920/gemini_generated_video_0079c4da_w8dutx.jpg"
+      imagesrcset="https://res.cloudinary.com/dw5b0vlbz/video/upload/so_0,f_jpg,q_auto,w_960/gemini_generated_video_0079c4da_w8dutx.jpg 960w, https://res.cloudinary.com/dw5b0vlbz/video/upload/so_0,f_jpg,q_auto,w_1920/gemini_generated_video_0079c4da_w8dutx.jpg 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Massagem e Depilação em Domicílio em Brasília | Mãos de Leide" />
+    <meta
+      property="og:description"
+      content="Massoterapia, ventosaterapia, pedras quentes e depilação com cera em domicílio em Brasília–DF. Atendimento exclusivo com a Leide. Agende pelo WhatsApp."
+    />
+    <meta property="og:url" content="https://www.maosdeleide.com.br/" />
+    <meta property="og:site_name" content="Mãos de Leide" />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/dw5b0vlbz/video/upload/so_0,c_fill,w_1200,h_630,q_auto,f_jpg/gemini_generated_video_0079c4da_w8dutx.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Massoterapia em domicílio em Brasília — Mãos de Leide" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Massagem e Depilação em Domicílio em Brasília | Mãos de Leide" />
+    <meta
+      name="twitter:description"
+      content="Massoterapia, ventosaterapia, pedras quentes e depilação com cera em domicílio em Brasília–DF. Atendimento exclusivo com a Leide. Agende pelo WhatsApp."
+    />
+    <meta
+      name="twitter:image"
+      content="https://res.cloudinary.com/dw5b0vlbz/video/upload/so_0,c_fill,w_1200,h_630,q_auto,f_jpg/gemini_generated_video_0079c4da_w8dutx.jpg"
+    />
+    <meta name="twitter:image:alt" content="Massoterapia em domicílio em Brasília — Mãos de Leide" />
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env*
+!.env.example
+
+# Temporary media & studio history
+.aistudio/
+migrated_prompt_history/
+public/assets/aistudio/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
