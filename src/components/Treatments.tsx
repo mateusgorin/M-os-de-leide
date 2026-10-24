@@ -126,9 +126,10 @@ export const Treatments: React.FC = () => {
             <SectionTitle
               tone="light"
               ornamentColor="#954C22"
-              tagline="Estética & Higiene"
-              title="Depilação com Cera"
-              className="max-w-2xl mb-14 md:mb-16"
+              tagline="Cuidado Integral & Autoestima"
+              title="Suavidade para a Sua Pele no Conforto do Lar"
+              description="Pensando no seu tempo e na sua comodidade, a Leide também leva o cuidado da depilação com cera morna até a sua casa. Mais do que a remoção de pelos, é um ritual de higiene, frescor e toque aveludado para a pele, realizado com cera hipoalergênica e materiais 100% descartáveis. Aproveite o mesmo atendimento para cuidar do seu corpo por completo, sem precisar se deslocar para diferentes estabelecimentos."
+              className="max-w-3xl mb-14 md:mb-16"
             />
           </Reveal>
 
